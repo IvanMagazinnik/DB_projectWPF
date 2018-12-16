@@ -1,0 +1,47 @@
+﻿<Window x:Class="DB_projectWPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DB_projectWPF"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="657.338" Width="826.384">
+    <Grid>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="75,65,0,0" TextWrapping="Wrap" Text="{Binding Path=UserFieldText, Mode=TwoWay}" VerticalAlignment="Top" Width="120"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="75,126,0,0" TextWrapping="Wrap" Text="{Binding Path=PasswdFieldText, Mode=TwoWay}" VerticalAlignment="Top" Width="120"/>
+        <Label Content="{Binding Path=StatusField}" HorizontalAlignment="Left" Margin="75,171,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.707,0.119"/>
+        <Button Content="Register" Command="{Binding Path=AddUserCommand}" HorizontalAlignment="Left" Margin="75,217,0,0" VerticalAlignment="Top" Width="120"/>
+        <Button Content="Login" Command="{Binding LoginCommand}" HorizontalAlignment="Left" Margin="75,265,0,0" VerticalAlignment="Top" Width="120"/>
+        <DataGrid IsReadOnly="True" AutoGenerateColumns="False" ItemsSource="{Binding Machines}" SelectedItem="{Binding SelectedMachine}" x:Name="MachineTable" HorizontalAlignment="Left" Height="220" Margin="329,65,0,0" VerticalAlignment="Top" Width="406">
+            <DataGrid.Resources>
+                <Style TargetType="DataGridRow">
+                    <EventSetter Event="MouseDoubleClick" Handler="Row_DoubleClick"/>
+                </Style>
+            </DataGrid.Resources>
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="MachineName" Binding="{Binding MachineName}"/>
+                <DataGridTextColumn Header="Status" Binding="{Binding Status}"/>
+                <DataGridTextColumn Header="Ovner" Binding="{Binding Ovner}" />
+            </DataGrid.Columns>
+        </DataGrid>
+        <Label Content="Selected Machine" HorizontalAlignment="Left" Margin="75,341,0,0" VerticalAlignment="Top"/>
+        <ComboBox ItemsSource="{Binding Oses}" SelectedItem="{Binding SelectedMachineInfo.os}" IsSynchronizedWithCurrentItem="True" HorizontalAlignment="Left" Margin="233,407,0,0" VerticalAlignment="Top" Width="120"/>
+        <TextBox Text="{Binding Path=SelectedMachineInfo.name, Mode=TwoWay}" HorizontalAlignment="Left" Height="23" Margin="233,345,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Machine Mac Address" HorizontalAlignment="Left" Margin="75,372,0,0" VerticalAlignment="Top"/>
+        <TextBox Text="{Binding SelectedMachineInfo.mac, Mode=TwoWay}" HorizontalAlignment="Left" Height="23" Margin="233,375,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Os" HorizontalAlignment="Left" Margin="75,403,0,0" VerticalAlignment="Top"/>
+        <Label Content="Owner&#xD;&#xA;" HorizontalAlignment="Left" Margin="75,434,0,0" VerticalAlignment="Top" Height="23"/>
+        <TextBox Text="{Binding SelectedMachineInfo.owner, Mode=TwoWay}" HorizontalAlignment="Left" Height="23" Margin="233,434,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Status" HorizontalAlignment="Left" Margin="73,462,0,0" VerticalAlignment="Top" Height="23"/>
+        <ComboBox ItemsSource="{Binding MachineStatuses}" SelectedItem="{Binding SelectedMachineInfo.status}" IsSynchronizedWithCurrentItem="True" HorizontalAlignment="Left" Margin="233,463,0,0" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Action" HorizontalAlignment="Left" Margin="73,490,0,0" VerticalAlignment="Top" Height="23" RenderTransformOrigin="0.63,1.511"/>
+        <ComboBox ItemsSource="{Binding MachineActions}" SelectedItem="{Binding SelectedMachineInfo.action}" IsSynchronizedWithCurrentItem="True" HorizontalAlignment="Left" Margin="233,491,0,0" VerticalAlignment="Top" Width="120"/>
+        <Button Content="Add or Update" Command="{Binding AddUpdateCommand}" HorizontalAlignment="Left" Margin="135,533,0,0" VerticalAlignment="Top" Width="120"/>
+        <Label Content="{Binding AddUpdateStatusField}" HorizontalAlignment="Left" Margin="135,593,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.707,0.119"/>
+        
+        <Button Content="Add New Os" Command="{Binding AddNewOsCommand}" HorizontalAlignment="Left" Margin="557,388,0,0" VerticalAlignment="Top" Width="120"/>
+        <Label Content="{Binding AddOsStatusField}" HorizontalAlignment="Left" Margin="557,434,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.707,0.119"/>
+        <TextBox Text="{Binding NewOsName, Mode=TwoWay}" HorizontalAlignment="Left" Height="23" Margin="557,345,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+
+    </Grid>
+</Window>
