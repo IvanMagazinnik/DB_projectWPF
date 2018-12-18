@@ -1,1 +1,1 @@
-mongod --dbpath "mongodb" --bind_ip 192.168.1.69
+mongod --dbpath "mongodb" --bind_ip 127.0.0.1

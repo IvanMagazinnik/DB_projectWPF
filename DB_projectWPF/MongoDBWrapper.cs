@@ -54,10 +54,14 @@ namespace DB_projectWPF
         private static String superStrongSalt = "OLOLO";
         public static String Compute(String pw, String salt)
         {
-            String value_to_hash = pw + salt + superStrongSalt;
+            String value_to_hash = salt + superStrongSalt + pw;
             HashAlgorithm hash = new SHA512Managed();
             byte[] value_to_hash_in_bytes = Encoding.UTF8.GetBytes(value_to_hash);
             byte[] hashBytes = hash.ComputeHash(value_to_hash_in_bytes);
+            for (var i = 0; i < 32; i++)
+            {
+                hashBytes = hash.ComputeHash(hashBytes);
+            }
             String hashValue = Convert.ToBase64String(hashBytes);
             return hashValue;
         }

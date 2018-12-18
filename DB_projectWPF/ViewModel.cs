@@ -165,7 +165,7 @@ namespace DB_projectWPF
         public ViewModel()
         {
             wrapper = new MongoDBWrapper();
-            wrapper.Connect("mongodb://192.168.1.69:27017/DB_course");
+            wrapper.Connect("mongodb://127.0.0.1:27017");
             this.model = new Model(wrapper);
             userFieldText = "admin";
             statusField = "Waiting For Action";
@@ -190,7 +190,9 @@ namespace DB_projectWPF
                 AddOsStatusField = status.description;
                 if (status == Statuses.Success)
                 {
+                    var tmpStorage = SelectedMachineInfo.os;
                     fillOses();
+                    SelectedMachineInfo.os = tmpStorage;
                 }
             }
         }
@@ -260,7 +262,7 @@ namespace DB_projectWPF
             }
             if (SelectedMachineInfo != null)
             {
-                SelectedMachineInfo = wrapper.GetAllMachineInfo(SelectedMachine.MachineName);
+                SelectedMachineInfo = wrapper.GetAllMachineInfo(SelectedMachineInfo.name);
             }
         }
 
